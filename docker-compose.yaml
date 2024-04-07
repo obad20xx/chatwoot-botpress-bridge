@@ -44,6 +44,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - bridge
     command: sh -c "bundle exec rails db:chatwoot_prepare; bundle exec rails s -b 0.0.0.0 -p 3000"
 
 
@@ -73,8 +74,8 @@ services:
       - SECRET_KEY_BASE=Testing1234
       - BOTPRESS_ENDPOINT=http://botpress:3000
       - BOTPRESS_BOT_ID=hello
-      - CHATWOOT_ENDPOINT=http://chatwoot:3000
-      - CHATWOOT_BOT_TOKEN=password
+      - CHATWOOT_ENDPOINT=https://correct-cobra-stunning.ngrok-free.app
+      - CHATWOOT_BOT_TOKEN=J59nqZKbpmdNwmMF7syWDaTw
     ports:
       - '3002:3000'
 

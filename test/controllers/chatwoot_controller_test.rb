@@ -3,7 +3,7 @@ require "test_helper"
 class ChatwootControllerTest < ActionDispatch::IntegrationTest
   test "success" do
     stub_request(:post, Regexp.new(ENV['BOTPRESS_ENDPOINT'])).
-    to_return(status: 200, body: '{"responses":[{"type":"text","workflow":{},"text":"Testing","markdown":true,"typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
+    to_return(status: 200, body: '{"responses":[{"type":"text","workflow":{},"content":"Testing","markdown":true,"typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
     stub_request(:post,  Regexp.new(ENV['CHATWOOT_ENDPOINT'])).
     to_return(status: 200, body: '{"id":64374,"content":"Testing","inbox_id":10,"conversation_id":11791,"message_type":1,"content_type":"text","content_attributes":{},"created_at":1656268790,"private":false,"source_id":null,"sender":{"id":3,"name":"Botpress Testing","avatar_url":"","type":"agent_bot"}}', headers: {'Content-Type': 'application/json; charset=utf-8'})
 
@@ -14,7 +14,7 @@ class ChatwootControllerTest < ActionDispatch::IntegrationTest
 
   test "with dynamic botpress bot id" do
     stub_request(:post, Regexp.new(ENV['BOTPRESS_ENDPOINT'])).
-    to_return(status: 200, body: '{"responses":[{"type":"text","workflow":{},"text":"Testing","markdown":true,"typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
+    to_return(status: 200, body: '{"responses":[{"type":"text","workflow":{},"content":"Testing","markdown":true,"typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
     stub_request(:post,  Regexp.new(ENV['CHATWOOT_ENDPOINT'])).
     to_return(status: 200, body: '{"id":64374,"content":"Testing","inbox_id":10,"conversation_id":11791,"message_type":1,"content_type":"text","content_attributes":{},"created_at":1656268790,"private":false,"source_id":null,"sender":{"id":3,"name":"Botpress Testing","avatar_url":"","type":"agent_bot"}}', headers: {'Content-Type': 'application/json; charset=utf-8'})
 
@@ -27,7 +27,7 @@ class ChatwootControllerTest < ActionDispatch::IntegrationTest
 
   test "should send image" do
     stub_request(:post, Regexp.new(ENV['BOTPRESS_ENDPOINT'])).
-      to_return(status: 200, body: '{"responses":[{"type":"image","workflow":{},"image":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/42rghrwr2zndfjw3fn4q-C%C3%B3pia%20de%20Wo%20(1024%C2%A0%C3%97%C2%A01024%C2%A0px)%20(2).png","title":"Texto da imagem de teste","typing":true},{"type":"text","workflow":{},"text":"Bye!","markdown":true,"typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
+      to_return(status: 200, body: '{"responses":[{"type":"image","workflow":{},"image":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/42rghrwr2zndfjw3fn4q-C%C3%B3pia%20de%20Wo%20(1024%C2%A0%C3%97%C2%A01024%C2%A0px)%20(2).png","title":"Texto da imagem de teste","typing":true},{"type":"text","workflow":{},"content":"Bye!","markdown":true,"typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
 
     stub_request(:get, Regexp.new(/api\/v1\/bots\/teste-file\/media/)).
       to_return(status: 200, body: File.read(Rails.root + 'test/fixtures/files/image-file.png'), headers: {'Content-Type': 'image/png'})
@@ -45,7 +45,7 @@ class ChatwootControllerTest < ActionDispatch::IntegrationTest
 
   test "should send video" do
     stub_request(:post, Regexp.new(ENV['BOTPRESS_ENDPOINT'])).
-      to_return(status: 200, body: '{"responses":[{"type":"video", "workflow":{}, "video":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/oj3s5liagedo2bmaaddy-video-test.mp4", "title":"titulo video teste", "typing":true}, {"type":"text", "workflow":{}, "text":"Bye!", "markdown":true, "typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
+      to_return(status: 200, body: '{"responses":[{"type":"video", "workflow":{}, "video":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/oj3s5liagedo2bmaaddy-video-test.mp4", "title":"titulo video teste", "typing":true}, {"type":"text", "workflow":{}, "content":"Bye!", "markdown":true, "typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
 
     stub_request(:get, Regexp.new(/api\/v1\/bots\/teste-file\/media/)).
       to_return(status: 200, body: File.read(Rails.root + 'test/fixtures/files/video-file.mp4'), headers: {'Content-Type': 'video/mp4'})
@@ -63,7 +63,7 @@ class ChatwootControllerTest < ActionDispatch::IntegrationTest
 
   test "should send file" do
     stub_request(:post, Regexp.new(ENV['BOTPRESS_ENDPOINT'])).
-      to_return(status: 200, body: '{"responses":[{"type":"file", "workflow":{}, "file":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/nmb8ifmr423ugq4xox4d-a.pdf", "typing":true}, {"type":"text", "workflow":{}, "text":"Bye!", "markdown":true, "typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
+      to_return(status: 200, body: '{"responses":[{"type":"file", "workflow":{}, "file":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/nmb8ifmr423ugq4xox4d-a.pdf", "typing":true}, {"type":"text", "workflow":{}, "content":"Bye!", "markdown":true, "typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
 
     stub_request(:get, Regexp.new(/api\/v1\/bots\/teste-file\/media/)).
       to_return(status: 200, body: File.read(Rails.root + 'test/fixtures/files/pdf-file.pdf'), headers: {'Content-Type': 'application/pdf'})
@@ -81,7 +81,7 @@ class ChatwootControllerTest < ActionDispatch::IntegrationTest
 
   test "should send file with message" do
     stub_request(:post, Regexp.new(ENV['BOTPRESS_ENDPOINT'])).
-      to_return(status: 200, body: '{"responses":[{"type":"file", "workflow":{}, "file":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/nmb8ifmr423ugq4xox4d-a.pdf", "title":"pdf teste", "typing":true}, {"type":"text", "workflow":{}, "text":"Bye!", "markdown":true, "typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
+      to_return(status: 200, body: '{"responses":[{"type":"file", "workflow":{}, "file":"https://app.botpress.zimobi.com.br/api/v1/bots/teste-file/media/nmb8ifmr423ugq4xox4d-a.pdf", "title":"pdf teste", "typing":true}, {"type":"text", "workflow":{}, "content":"Bye!", "markdown":true, "typing":true}]}', headers: {'Content-Type': 'application/json; charset=utf-8'})
 
     stub_request(:get, Regexp.new(/api\/v1\/bots\/teste-file\/media/)).
       to_return(status: 200, body: File.read(Rails.root + 'test/fixtures/files/pdf-file.pdf'), headers: {'Content-Type': 'application/pdf'})

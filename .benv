@@ -1,0 +1,8 @@
+#for bridge
+RAILS_ENV=production
+RAILS_LOG_TO_STDOUT=true
+SECRET_KEY_BASE=Testing1234
+BOTPRESS_ENDPOINT=http://botpress:3000
+BOTPRESS_BOT_ID=hello
+CHATWOOT_ENDPOINT=https://correct-cobra-stunning.ngrok-free.app
+CHATWOOT_BOT_TOKEN=MskRYkwBtsv2ZQeuZ4zdPDkx
